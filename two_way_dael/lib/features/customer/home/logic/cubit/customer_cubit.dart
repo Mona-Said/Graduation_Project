@@ -378,13 +378,14 @@ class CustomerCubit extends Cubit<CustomerStates> {
   final emailFormKey = GlobalKey<FormState>();
 
   ContactUsModel? contactUsModel;
+
   void contactUs({
     required String subject,
     required String message,
-  }) {
+  }) async {
     emit(ContactUsLoadingState());
     try {
-      DioHelper.postData(
+      await DioHelper.postData(
         url: CONTACTUS,
         token: token,
         data: {
@@ -396,9 +397,15 @@ class CustomerCubit extends Cubit<CustomerStates> {
         emit(ContactUsSuccessState());
       }).catchError((error) {
         if (error is DioException && error.response != null) {
-          final errorMessage =
-              'Error ${error.response?.statusCode}: ${error.response?.data['message']}';
-          emit(ContactUsErrorState(errorMessage));
+          if (error.response?.statusCode == 401) {
+            // Handle 401 Unauthorized response
+            emit(ContactUsErrorState(
+                'Unauthenticated. Please check your authentication token.'));
+          } else {
+            final errorMessage =
+                'Error ${error.response?.statusCode}: ${error.response?.data['message']}';
+            emit(ContactUsErrorState(errorMessage));
+          }
         } else {
           emit(ContactUsErrorState('An unexpected error occurred: $error'));
         }

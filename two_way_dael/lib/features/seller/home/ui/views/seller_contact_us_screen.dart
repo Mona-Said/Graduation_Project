@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:two_way_dael/core/helpers/extensions.dart';
-import 'package:two_way_dael/core/helpers/spacing.dart';
-import 'package:two_way_dael/core/theming/colors.dart';
-import 'package:two_way_dael/core/theming/styles.dart';
-import 'package:two_way_dael/core/widgets/custom_button.dart';
-import 'package:two_way_dael/core/widgets/custom_text_form_field.dart';
-import 'package:two_way_dael/core/widgets/show_toast.dart';
-import 'package:two_way_dael/features/customer/home/logic/cubit/customer_cubit.dart';
-import 'package:two_way_dael/features/customer/home/logic/cubit/customer_states.dart';
+import 'package:two_way_dael/features/seller/home/logic/cubit/seller_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../data/models/about_app_model.dart';
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/theming/colors.dart';
+import '../../../../../core/theming/styles.dart';
+import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../core/widgets/show_toast.dart';
+import '../../../../seller/home/data/models/seller_about_app_model.dart';
 
-class ContactUsScreen extends StatelessWidget {
-  const ContactUsScreen({super.key});
+class SellerContactUsScreen extends StatelessWidget {
+  const SellerContactUsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CustomerCubit, CustomerStates>(
+    return BlocConsumer<SellerCubit, SellerStates>(
       listener: (context, state) {
         if (state is ContactUsSuccessState) {
           showToast(
@@ -27,8 +26,9 @@ class ContactUsScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        var cubit = CustomerCubit.get(context);
-        var aboutModel = CustomerCubit.get(context).aboutAppModel?.data;
+        var cubit = SellerCubit.get(context);
+        var sellerAboutModel =
+            SellerCubit.get(context).sellerAboutAppModel?.data;
         return Scaffold(
           appBar: AppBar(
             toolbarHeight: 80,
@@ -130,11 +130,11 @@ class ContactUsScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          if (aboutModel != null) {
-                            _sendEmail(aboutModel);
+                          if (sellerAboutModel != null) {
+                            _sendEmail(sellerAboutModel);
                           } else {
                             // Handle the case where aboutModel is null
-                            debugPrint('aboutModel is null');
+                            debugPrint('sellerAboutModel is null');
                           }
                         },
                         child: Row(
@@ -167,44 +167,44 @@ class ContactUsScreen extends StatelessWidget {
                         children: [
                           buildSocialMediaItem(
                             onTap: () {
-                              if (aboutModel != null) {
-                                launchFacebook(aboutModel);
+                              if (sellerAboutModel != null) {
+                                launchFacebook(sellerAboutModel);
                               } else {
                                 // Handle the case where aboutModel is null
-                                debugPrint('aboutModel is null');
+                                debugPrint('sellerAboutModel is null');
                               }
                             },
                             image: 'assets/images/facebook.png',
                           ),
                           buildSocialMediaItem(
                             onTap: () {
-                              if (aboutModel != null) {
-                                launchTiktok(aboutModel);
+                              if (sellerAboutModel != null) {
+                                launchTiktok(sellerAboutModel);
                               } else {
                                 // Handle the case where aboutModel is null
-                                debugPrint('aboutModel is null');
+                                debugPrint('sellerAboutModel is null');
                               }
                             },
                             image: 'assets/images/tiktok.png',
                           ),
                           buildSocialMediaItem(
                             onTap: () {
-                              if (aboutModel != null) {
-                                launchTwitter(aboutModel);
+                              if (sellerAboutModel != null) {
+                                launchTwitter(sellerAboutModel);
                               } else {
                                 // Handle the case where aboutModel is null
-                                debugPrint('aboutModel is null');
+                                debugPrint('sellerAboutModel is null');
                               }
                             },
                             image: 'assets/images/X.png',
                           ),
                           buildSocialMediaItem(
                             onTap: () {
-                              if (aboutModel != null) {
-                                launchInstagram(aboutModel);
+                              if (sellerAboutModel != null) {
+                                launchInstagram(sellerAboutModel);
                               } else {
                                 // Handle the case where aboutModel is null
-                                debugPrint('aboutModel is null');
+                                debugPrint('sellerAboutModel is null');
                               }
                             },
                             image: 'assets/images/instagram.png',

@@ -171,8 +171,7 @@ class DioHelper {
   }
   //*--------------------------------------------------
 
-  
-static Future<Response> postProduct({
+  static Future<Response> postProduct({
     required String url,
     String? token,
     required List<File> images,

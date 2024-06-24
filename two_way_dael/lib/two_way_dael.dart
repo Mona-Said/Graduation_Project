@@ -33,7 +33,8 @@ class TwoWayDealApp extends StatelessWidget {
               create: (context) => SellerCubit()
                 ..getCategories()
                 ..getNotifiCations()
-                ..getSellerData(),
+                ..getSellerData()
+                ..getAboutApp(),
             ),
           ],
           child: MaterialApp(

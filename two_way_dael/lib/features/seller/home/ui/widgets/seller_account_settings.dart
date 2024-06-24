@@ -56,7 +56,7 @@ class SellerAccountSettings extends StatelessWidget {
             verticalSpace(20),
             InkWell(
               onTap: () {
-                context.pushNamed(Routes.contactUsScreen);
+                context.pushNamed(Routes.sellerContactUsScreen);
               },
               child: buildAccountSettingsItem(
                 image: 'assets/images/contact_us_icon.png',

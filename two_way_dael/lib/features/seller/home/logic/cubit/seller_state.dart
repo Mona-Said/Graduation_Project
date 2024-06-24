@@ -137,3 +137,23 @@ class SellerAddProductErrorState extends SellerStates {
 
   SellerAddProductErrorState(this.error);
 }
+
+class ContactUsLoadingState extends SellerStates {}
+
+class ContactUsSuccessState extends SellerStates {}
+
+class ContactUsErrorState extends SellerStates {
+  final String error;
+
+  ContactUsErrorState(this.error);
+}
+
+class AboutAppLoadingState extends SellerStates {}
+
+class AboutAppSuccessState extends SellerStates {}
+
+class AboutAppErrorState extends SellerStates {
+  final String error;
+
+  AboutAppErrorState(this.error);
+}

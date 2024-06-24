@@ -18,6 +18,9 @@ import 'package:two_way_dael/features/seller/home/ui/widgets/build_charity_item.
 
 import '../../../../../core/networking/dio_helper.dart';
 import '../../../../customer/home/data/models/about_app_model.dart';
+import '../../../../customer/home/data/models/contact_us_model.dart';
+import '../../data/models/seller_about_app_model.dart';
+import '../../data/models/seller_contact_us_model.dart';
 import '../../ui/views/seller_products_screen.dart';
 
 part 'seller_state.dart';
@@ -330,8 +333,6 @@ class SellerCubit extends Cubit<SellerStates> {
   //   );
   // }
 
-  AboutAppModel? aboutAppModel;
-
   SellerProductDetails? sellerProductDetails;
   Future<void> getSellerProductDetails({required int id}) async {
     emit(GetSellerProductDetailsLoadingState());
@@ -416,6 +417,62 @@ class SellerCubit extends Cubit<SellerStates> {
       debugPrint(error.toString());
       emit(GetSellerNotificationsErrorState(error.toString()));
     });
+  }
+
+  SellerAboutAppModel? sellerAboutAppModel;
+  void getAboutApp() async {
+    emit(AboutAppLoadingState());
+    await DioHelper.getData(
+      url: ABOUTAPP,
+    ).then((value) {
+      sellerAboutAppModel = SellerAboutAppModel.fromJson(value.data);
+      emit(AboutAppSuccessState());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(AboutAppErrorState(error.toString()));
+    });
+  }
+
+  final titleController = TextEditingController();
+  final messageController = TextEditingController();
+  final emailFormKey = GlobalKey<FormState>();
+
+  SellerContactUsModel? sellerContactUsModel;
+
+  void contactUs({
+    required String subject,
+    required String message,
+  }) async {
+    emit(ContactUsLoadingState());
+    try {
+      await DioHelper.postData(
+        url: CONTACTUS,
+        token: sellerToken,
+        data: {
+          'subject': subject,
+          'message': message,
+        },
+      ).then((value) {
+        sellerContactUsModel = SellerContactUsModel.fromJson(value.data);
+        emit(ContactUsSuccessState());
+      }).catchError((error) {
+        if (error is DioException && error.response != null) {
+          if (error.response?.statusCode == 401) {
+            // Handle 401 Unauthorized response
+            emit(ContactUsErrorState(
+                'Unauthenticated. Please check your authentication token.'));
+          } else {
+            final errorMessage =
+                'Error ${error.response?.statusCode}: ${error.response?.data['message']}';
+            emit(ContactUsErrorState(errorMessage));
+          }
+        } else {
+          emit(ContactUsErrorState('An unexpected error occurred: $error'));
+        }
+      });
+    } catch (error) {
+      emit(ContactUsErrorState('An unexpected error occurred: $error'));
+    }
   }
 
   List<Widget> charities = [

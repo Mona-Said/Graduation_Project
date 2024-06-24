@@ -14,7 +14,7 @@ import 'package:two_way_dael/features/customer/auth/signup/ui/views/photo_and_ad
 import 'package:two_way_dael/features/customer/auth/signup/ui/views/customer_welcome_screen.dart';
 import 'package:two_way_dael/features/customer/home/ui/Modules/about_app.dart';
 import 'package:two_way_dael/features/customer/home/ui/Modules/cart_screen.dart';
-import 'package:two_way_dael/features/customer/home/ui/Modules/contact_us_screen.dart';
+import 'package:two_way_dael/features/customer/home/ui/Modules/customer_contact_us_screen.dart';
 import 'package:two_way_dael/features/customer/home/ui/Modules/favorite_sellers.dart';
 import 'package:two_way_dael/features/customer/home/ui/Modules/notifications_module.dart';
 import 'package:two_way_dael/features/customer/home/ui/Modules/search_module.dart';
@@ -38,6 +38,7 @@ import '../../features/customer/auth/signup/ui/views/signup_screen.dart';
 import '../../features/customer/home/ui/views/home_screen.dart';
 import '../../features/onboarding/views/onboarding_screen.dart';
 import '../../features/customer/home/data/models/about_app_model.dart';
+import '../../features/seller/home/ui/views/seller_contact_us_screen.dart';
 
 class AppRouter {
   Route generateRoure(RouteSettings settings) {
@@ -79,7 +80,7 @@ class AppRouter {
       case Routes.changePasswordScreen:
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       case Routes.contactUsScreen:
-        return MaterialPageRoute(builder: (_) => ContactUsScreen());
+        return MaterialPageRoute(builder: (_) => CustomerContactUsScreen());
       case Routes.cartScreen:
         return MaterialPageRoute(builder: (_) => const CartScreen());
       case Routes.customerwelcomeScreen:
@@ -112,6 +113,8 @@ class AppRouter {
       case Routes.sellerChangePasswordScreen:
         return MaterialPageRoute(
             builder: (_) => const SellerChangePasswordScreen());
+      case Routes.sellerContactUsScreen:
+        return MaterialPageRoute(builder: (_) => const SellerContactUsScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

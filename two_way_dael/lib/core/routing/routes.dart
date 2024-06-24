@@ -32,5 +32,7 @@ class Routes {
   static const String sellerAddNewProduct = '/sellerAddNewProduct';
   static const String sellerDonationScreen = '/sellerDonationScreen';
   static const String sellerNewOrdersScreen = '/sellerNewOrdersScreen';
-  static const String sellerChangePasswordScreen = '/sellerChangePasswordScreen';
+  static const String sellerChangePasswordScreen =
+      '/sellerChangePasswordScreen';
+  static const String sellerContactUsScreen = '/sellerContactUsScreen';
 }
