@@ -12,6 +12,7 @@ import 'core/routing/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   DioHelper.init();
   await ScreenUtil.ensureScreenSize();
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   String widget;
   bool? onBoarding = CashHelper.getData(key: 'onBoarding');
+
   token = CashHelper.getData(key: 'token');
   sellerToken = CashHelper.getData(key: 'sellerToken');
 
